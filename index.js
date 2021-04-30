@@ -22,20 +22,23 @@ function censerText (toFilterText, censerWord){
 
 const splitRule = /(?=[.\s]|\b)/
 let splitToFilterText = toFilterText.split(splitRule)
-console.log(splitToFilterText)
+
 const filteredText = []
+
+let censoredCounter = 0
 
 for(const word of splitToFilterText){
   if(word.localeCompare(censerWord, undefined, { sensitivity: 'accent' }) === 0){
     filteredText.push( "*".repeat(censerWord.length))
+    censoredCounter ++
   }
   else{
     filteredText.push(word)
   }
 }
 
-return filteredText.join("")
-
+console.log(`Filtered text: ${filteredText.join("")}
+Censored word count: ${censoredCounter}`)
 }
 
-console.log(censerText(text, "lorem"))
+censerText(text, "ut")
