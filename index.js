@@ -18,27 +18,33 @@ const text =
 // - Create a function that takes a replacement string, a word to censor, and censors the text input
 // - Print out the censored text to the console
 
-function censerText (toFilterText, censerWord){
+function censerText (){
 
-const splitRule = /(?=[.\s]|\b)/
-let splitToFilterText = toFilterText.split(splitRule)
+  const splitRule = /(?=[.\s]|\b)/
 
-const filteredText = []
+  let toFilterText = prompt("Please enter the full text to censor.")
+  let splitToFilterText = toFilterText.split(splitRule)
 
-let censoredCounter = 0
+  const censerWord = prompt("Please enter the word to be censored")
+  const replaceWord = prompt("What should replace the censored words?")
 
-for(const word of splitToFilterText){
-  if(word.localeCompare(censerWord, undefined, { sensitivity: 'accent' }) === 0){
-    filteredText.push( "*".repeat(censerWord.length))
-    censoredCounter ++
+  const filteredText = []
+  let censoredCounter = 0
+
+  for(const word of splitToFilterText){
+    if(word.localeCompare(censerWord, undefined, { sensitivity: 'accent' }) === 0){
+      filteredText.push(replaceWord)
+      censoredCounter ++
+    }
+    else{
+      filteredText.push(word)
+    }
   }
-  else{
-    filteredText.push(word)
-  }
+
+  console.log(`Filtered text: 
+  ${filteredText.join("")}
+
+  Censored word count: ${censoredCounter}`)
 }
 
-console.log(`Filtered text: ${filteredText.join("")}
-Censored word count: ${censoredCounter}`)
-}
-
-censerText(text, "ut")
+censerText();
